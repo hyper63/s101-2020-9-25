@@ -1,4 +1,5 @@
 <script>
+  import { fly } from 'svelte/transition'
   import { createEventDispatcher } from 'svelte'
   const dispatch = createEventDispatcher()
 
@@ -8,6 +9,6 @@
     dispatch('click', { city })
   }
 </script>
-<aside on:click={handleClick}>
+<aside in:fly={{x: -1000, duration: 1000, delay: 1500}} on:click={handleClick}>
   <h3>{city}</h3>
 </aside>

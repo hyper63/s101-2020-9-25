@@ -1,4 +1,6 @@
 <script>
+  import { blur } from 'svelte/transition'
+
   import CityCard from '../components/CityCard.svelte'
   import { dispatch } from '../store.js'
 
@@ -14,11 +16,12 @@
   }
 
 </script>
+<div in:blur={{delay: 1000, duration: 1000}}>
 <nav>
   <div>Favorites</div>
   <a href="">Add</a>
 </nav>
-<main>
+<main >
   <section>
     {#each cities as city}
     <CityCard {city} on:click={changeCurrentCity(city)} />
@@ -27,6 +30,7 @@
     {/each}
   </section>
 </main>
+</div>
 <style>
  nav {
    height: 24px;
