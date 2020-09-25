@@ -1,10 +1,13 @@
 <script>
   import CityCard from '../components/CityCard.svelte'
+  import page from 'page'
+
   let cities = ['Charleston, SC', 'New york, NY', 'San Francisco, CA']
-   
+  //let cities = []
   function changeCurrentCity(city) {
     return () => {
       console.log('city', city)
+      page('/')
     }
   }
 
@@ -17,6 +20,8 @@
   <section>
     {#each cities as city}
     <CityCard {city} on:click={changeCurrentCity(city)} />
+    {:else}
+      No Favorites...
     {/each}
   </section>
 </main>
