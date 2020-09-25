@@ -1,18 +1,23 @@
+<script>
+  import CityCard from '../components/CityCard.svelte'
+  let cities = ['Charleston, SC', 'New york, NY', 'San Francisco, CA']
+   
+  function changeCurrentCity(city) {
+    return () => {
+      console.log('city', city)
+    }
+  }
+
+</script>
 <nav>
   <div>Favorites</div>
   <a href="">Add</a>
 </nav>
 <main>
   <section>
-    <aside>
-      <h3>Charleston, SC</h3>
-    </aside>
-    <aside>
-      <h3>New york, NY</h3>
-    </aside>
-    <aside>
-      <h3>San Francisco, CA</h3>
-    </aside>
+    {#each cities as city}
+    <CityCard {city} on:click={changeCurrentCity(city)} />
+    {/each}
   </section>
 </main>
 <style>
