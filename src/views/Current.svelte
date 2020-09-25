@@ -1,16 +1,10 @@
 <script>
   import Weather from '../components/Weather.svelte'
   import { fahrenheitToCelsius, celsiusToFahrenheit } from "temperature"
-
+  import { getJSON } from '../lib/async.js'
+  
   let temp = 21.7;
   let unit = "c";
-
-  const weather = {
-    city: 'Charleston, SC',
-    temp: '80 &deg; F',
-    icon: 'a01n',
-    description: 'raining'
-  }
 
   $: displayTemp = `${Math.floor(temp)} &deg; ${unit.toUpperCase()}`;
 
@@ -21,6 +15,17 @@
   function convertToC() {
     temp = fahrenheitToCelsius(temp);
     unit = "c";
+  }
+
+  function getWeather() {
+    return getJSON("/api/weather?city=charleston,sc&country=us").then(
+      (results) => ({
+        temp: `${results.temp} &deg; C`,
+        icon: results.weather.icon,
+        description: results.weather.description,
+        city: `${results.city_name} ${results.state_code}`,
+      })
+    );
   }
 </script>
 <nav>
@@ -33,7 +38,12 @@
 </nav>
 <main>
   <p>{@html displayTemp}</p>
-  <Weather {...weather} />
+  {#await getWeather()}
+    Loading...
+  {:then weather}
+    <Weather {...weather} />
+
+  {/await}
 </main>
 <style>
   h3 {
