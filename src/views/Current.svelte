@@ -1,5 +1,9 @@
 <script>
   import Weather from '../components/Weather.svelte'
+  import { fahrenheitToCelsius, celsiusToFahrenheit } from "temperature"
+
+  let temp = 21.7;
+  let unit = "c";
 
   const weather = {
     city: 'Charleston, SC',
@@ -7,16 +11,28 @@
     icon: 'a01n',
     description: 'raining'
   }
+
+  $: displayTemp = `${Math.floor(temp)} &deg; ${unit.toUpperCase()}`;
+
+  function convertToF() {
+    temp = celsiusToFahrenheit(temp);
+    unit = "f";
+  }
+  function convertToC() {
+    temp = fahrenheitToCelsius(temp);
+    unit = "c";
+  }
 </script>
 <nav>
   <div>
-    <a href="">F</a>
+    <a on:click|preventDefault={convertToF}>F</a>
     |
-    <a href="">C</a>
+    <a on:click|preventDefault={convertToC}>C</a>
   </div>
   <a href="">Favorites</a>
 </nav>
 <main>
+  <p>{@html displayTemp}</p>
   <Weather {...weather} />
 </main>
 <style>
