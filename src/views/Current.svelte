@@ -1,3 +1,11 @@
+<script>
+  const weather = {
+    city: 'Charleston, SC',
+    temp: '80 &deg; F',
+    icon: 'a01n',
+    description: 'raining'
+  }
+</script>
 <nav>
   <div>
     <a href="">F</a>
@@ -8,13 +16,16 @@
 </nav>
 <main>
   <figure>
-    <img alt="partly cloudy" src="/icons/a01d.png" />
+    <img alt={weather.description} src="/icons/{weather.icon}.png" />
   </figure>
-  <h3>Charleston, SC</h3>
-  <h1>74 &deg; F</h1>
-  <p>Partly Cloudy</p>
+  <h3>{weather.city}</h3>
+  <h1>{@html weather.temp}</h1>
+  <p>{weather.description}</p>
 </main>
 <style>
+  h3 {
+    color: rebeccapurple;
+  }
   nav {
     margin-bottom: 0;
     margin-left: 8px;
