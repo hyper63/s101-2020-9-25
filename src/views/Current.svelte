@@ -2,7 +2,10 @@
   import Weather from '../components/Weather.svelte'
   import { fahrenheitToCelsius, celsiusToFahrenheit } from "temperature"
   import { getJSON } from '../lib/async.js'
+  import { store } from '../store.js'
   
+
+   
   let temp = 21.7;
   let unit = "c";
 
@@ -18,7 +21,8 @@
   }
 
   function getWeather() {
-    return getJSON("/api/weather?city=charleston,sc&country=us").then(
+    const current = $store.current.toLowerCase().replace(', ', ',')
+    return getJSON(`/api/weather?city=${current}&country=us`).then(
       (results) => ({
         temp: `${results.temp} &deg; C`,
         icon: results.weather.icon,

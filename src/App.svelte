@@ -20,4 +20,4 @@
   }
 
 </script>
-<svelte:component this={page} {params} />
+<svelte:component this={page}  />
