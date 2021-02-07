@@ -30,7 +30,7 @@ Pull workshop template down from github
 and initialize it and provide link to clone.
 
 ```sh
-npx degit hyper63/svelte101-workshop weather-app
+npx degit hyper63/weather weather-app
 cd $_
 git init
 git add .
